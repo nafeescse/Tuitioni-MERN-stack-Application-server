@@ -20,13 +20,19 @@ async function run() {
     try {
         await client.connect();
         const tuitionsCollection = client.db("tuition-e").collection("all-tuitions");
+        const tutorsCollection = client.db("tuition-e").collection("all-tutors");
 
         app.get('/all-tuitions', async (req, res) => {
             const query = {};
             const cursor = tuitionsCollection.find(query);
             const items = await cursor.toArray();
             res.send(items);
-
+        })
+        app.get('/all-tutors', async (req, res) => {
+            const query = {};
+            const cursor = tutorsCollection.find(query);
+            const items = await cursor.toArray();
+            res.send(items);
         })
 
     }
